@@ -132,7 +132,7 @@ class SEBlock(nn.Module):
         return x * y
 
 
-@ARCH_REGISTRY.register()
+#@ARCH_REGISTRY.register()
 class ResNetArcFace(nn.Module):
 
     def __init__(self, block, layers, use_se=True):

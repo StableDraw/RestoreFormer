@@ -6,7 +6,8 @@ from copy import deepcopy
 from RestoreFormer.modules.losses.lpips import LPIPS
 from RestoreFormer.modules.discriminator.model import NLayerDiscriminator, weights_init
 from RestoreFormer.modules.vqvae.facial_component_discriminator import FacialComponentDiscriminator
-from basicsr.losses.losses import GANLoss, L1Loss
+from basicsr.losses.basic_loss import L1Loss
+from basicsr.losses.gan_loss import GANLoss
 from RestoreFormer.modules.vqvae.arcface_arch import ResNetArcFace
 
 
