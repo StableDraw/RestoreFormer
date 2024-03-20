@@ -10,7 +10,7 @@ from basicsr.ops.fused_act import FusedLeakyReLU
 from basicsr.utils.registry import ARCH_REGISTRY
 
 
-@ARCH_REGISTRY.register()
+#@ARCH_REGISTRY.register()
 class FacialComponentDiscriminator(nn.Module):
 
     def __init__(self):
