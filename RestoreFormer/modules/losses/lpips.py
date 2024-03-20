@@ -10,11 +10,11 @@ from RestoreFormer.util import get_ckpt_path
 
 class LPIPS(nn.Module):
     # Learned perceptual metric
-    def __init__(self, use_dropout=True, style_weight=0.):
+    def __init__(self, use_dropout = True, style_weight = 0.):
         super().__init__()
         self.scaling_layer = ScalingLayer()
         self.chns = [64, 128, 256, 512, 512]  # vg16 features
-        self.net = vgg16(pretrained=True, requires_grad=False)
+        self.net = vgg16(pretrained = True, requires_grad = False)
         self.lin0 = NetLinLayer(self.chns[0], use_dropout=use_dropout)
         self.lin1 = NetLinLayer(self.chns[1], use_dropout=use_dropout)
         self.lin2 = NetLinLayer(self.chns[2], use_dropout=use_dropout)
@@ -26,18 +26,18 @@ class LPIPS(nn.Module):
 
         self.style_weight = style_weight
 
-    def load_from_pretrained(self, name="vgg_lpips"):
-        ckpt = get_ckpt_path(name, "experiments/pretrained_models/lpips")
-        self.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
+    def load_from_pretrained(self, name = "vgg_lpips"):
+        ckpt = get_ckpt_path(name, "weights")
+        self.load_state_dict(torch.load(ckpt, map_location = torch.device("cpu")), strict = False)
         print("loaded pretrained LPIPS loss from {}".format(ckpt))
 
     @classmethod
-    def from_pretrained(cls, name="vgg_lpips"):
-        if name is not "vgg_lpips":
+    def from_pretrained(cls, name = "vgg_lpips"):
+        if name != "vgg_lpips":
             raise NotImplementedError
         model = cls()
         ckpt = get_ckpt_path(name)
-        model.load_state_dict(torch.load(ckpt, map_location=torch.device("cpu")), strict=False)
+        model.load_state_dict(torch.load(ckpt, map_location = torch.device("cpu")), strict = False)
         return model
 
     def forward(self, input, target):
@@ -96,9 +96,13 @@ class NetLinLayer(nn.Module):
 
 
 class vgg16(torch.nn.Module):
-    def __init__(self, requires_grad=False, pretrained=True):
+    def __init__(self, requires_grad = False, pretrained = True):
         super(vgg16, self).__init__()
-        vgg_pretrained_features = models.vgg16(pretrained=pretrained).features
+        if pretrained == True:
+            weights = "VGG16_Weights.IMAGENET1K_V1"
+        else:
+            weights = None
+        vgg_pretrained_features = models.vgg16(weights = weights).features
         self.slice1 = torch.nn.Sequential()
         self.slice2 = torch.nn.Sequential()
         self.slice3 = torch.nn.Sequential()
