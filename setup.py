@@ -3,22 +3,18 @@ from setuptools import setup, find_packages
 import json
 import os
 
-def read_pipenv_dependencies(fname):
-    filepath = os.path.join(os.path.dirname(__file__), fname)
-    with open(filepath) as lockfile:
-        lockjson = json.load(lockfile)
-        return [dependency for dependency in lockjson.get('default')]
+def get_requirements(filename='requirements.txt'):
+    here = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(here, filename), 'r') as f:
+        requires = [line.replace('\n', '') for line in f.readlines()]
+    return requires
 
 if __name__ == '__main__':
     setup(
         name='restoreformer',
         version=os.getenv('PACKAGE_VERSION', '1.0.0'),
-        package_dir={'': 'src'},
-        packages=find_packages('src', include=[
-            'restoreformer'
-        ]),
+        package_dir={'': 'restoreformer'},
+        packages=find_packages('restoreformer'),
         description='RestoreFormer',
-        install_requires=[
-              *read_pipenv_dependencies('Pipfile.lock'),
-        ]
+        install_requires=get_requirements()
     )
