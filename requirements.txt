@@ -65,7 +65,7 @@ scikit-learn>=0.24.2
 scipy>=1.7.0
 setuptools>=52.0.0.post20210125
 six>=1.15.0
-sklearn>=0.0
+scikit-learn
 tb-nightly>=2.6.0a20210728
 tensorboard-data-server>=0.6.1
 tensorboard-plugin-wit>=1.8.0
