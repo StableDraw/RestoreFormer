@@ -13,8 +13,8 @@ if __name__ == '__main__':
     setup(
         name='restoreformer',
         version=os.getenv('PACKAGE_VERSION', '1.0.0'),
-        package_dir={'': 'restoreformer'},
-        packages=find_packages('restoreformer'),
+        package_dir={'': 'RestoreFormer'},
+        packages=find_packages('RestoreFormer'),
         description='RestoreFormer',
         install_requires=get_requirements()
     )
